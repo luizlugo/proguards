@@ -1,4 +1,4 @@
-package com.volcanolabs.proguardr8.networkInterceptors
+package com.volcanolabs.proguardr8.di.interceptors
 
 import com.volcanolabs.proguardr8.Constants.Companion.API_KEY
 import okhttp3.Interceptor
