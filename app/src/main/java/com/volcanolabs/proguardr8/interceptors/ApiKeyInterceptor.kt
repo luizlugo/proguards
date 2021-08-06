@@ -1,6 +1,6 @@
-package com.volcanolabs.proguardr8.di.interceptors
+package com.volcanolabs.proguardr8.interceptors
 
-import com.volcanolabs.proguardr8.Constants.Companion.API_KEY
+import com.volcanolabs.proguardr8.utils.API_KEY
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

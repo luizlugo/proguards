@@ -1,4 +1,4 @@
-package com.volcanolabs.proguardr8.moviesList
+package com.volcanolabs.proguardr8.presentation.moviesList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

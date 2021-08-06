@@ -1,8 +1,9 @@
 package com.volcanolabs.proguardr8.di
 
-import com.volcanolabs.proguardr8.BuildConfig
+import androidx.viewbinding.BuildConfig
 import com.volcanolabs.proguardr8.data.MoviesApi
-import com.volcanolabs.proguardr8.di.interceptors.ApiKeyInterceptor
+import com.volcanolabs.proguardr8.interceptors.ApiKeyInterceptor
+import com.volcanolabs.proguardr8.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,9 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
-    private val apiBaseUrl = "https://api.themoviedb.org/3"
-
+object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(apiKeyInterceptor: ApiKeyInterceptor): OkHttpClient {
@@ -39,12 +38,18 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMoviesService(okHttpClient: OkHttpClient): MoviesApi {
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(apiBaseUrl)
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoviesService(retrofit: Retrofit): MoviesApi {
+        return retrofit
             .create(MoviesApi::class.java)
     }
 }
