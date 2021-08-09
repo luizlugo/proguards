@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/movieList">
+
+    <fragment
+        android:id="@+id/movieList"
+        android:name="com.volcanolabs.proguardr8.presentation.moviesList.MovieList"
+        android:label="fragment_movies_list"
+        tools:layout="@layout/fragment_movies_list" >
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/movieDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetails"
+        android:name="com.volcanolabs.proguardr8.presentation.movieDetails.MovieDetails"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" />
+</navigation>

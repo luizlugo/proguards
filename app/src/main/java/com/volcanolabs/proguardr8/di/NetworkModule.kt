@@ -27,7 +27,7 @@ object NetworkModule {
             val loggingInterceptor = HttpLoggingInterceptor { message: String? ->
                 Timber.tag("OkHttpClient").i(message)
             }
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             httpClient.addInterceptor(loggingInterceptor)
         }
 

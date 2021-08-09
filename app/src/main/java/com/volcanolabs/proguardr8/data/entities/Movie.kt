@@ -1,12 +1,8 @@
 package com.volcanolabs.proguardr8.data.entities
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
 data class Movie(
-    @PrimaryKey
     @SerializedName("id")
     val id: Number,
     @SerializedName("poster_path")

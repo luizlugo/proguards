@@ -1,10 +1,12 @@
 package com.volcanolabs.proguardr8.data.mappers
 
 import com.volcanolabs.proguardr8.data.entities.Movie
+import com.volcanolabs.proguardr8.data.entities.MoviesWrapperResponse
+import com.volcanolabs.proguardr8.domain.entities.MoviesWrapper
 import javax.inject.Inject
 
 class MoviesMapper @Inject constructor() {
-    fun transform(movie: Movie) : com.volcanolabs.proguardr8.domain.entities.Movie {
+    private fun transform(movie: Movie): com.volcanolabs.proguardr8.domain.entities.Movie {
         return com.volcanolabs.proguardr8.domain.entities.Movie(
             movie.id,
             movie.posterPath,
@@ -20,6 +22,15 @@ class MoviesMapper @Inject constructor() {
             movie.voteCount,
             movie.video,
             movie.voteAverage
+        )
+    }
+
+    fun transform(moviesWrapperResponse: MoviesWrapperResponse): MoviesWrapper {
+        return MoviesWrapper(
+            moviesWrapperResponse.page,
+            moviesWrapperResponse.movies.map { transform(it) },
+            moviesWrapperResponse.totalPages,
+            moviesWrapperResponse.totalResults
         )
     }
 }

@@ -1,8 +1,8 @@
 package com.volcanolabs.proguardr8.data.repositories
 
-import com.volcanolabs.proguardr8.domain.entities.Movie
+import com.volcanolabs.proguardr8.domain.entities.MoviesWrapper
 
 interface MoviesRepository {
-    fun getPopularMovies() : List<Movie>
-    fun getTopRatedMovies(): List<Movie>
+    suspend fun getPopularMovies() : MoviesWrapper
+    suspend fun getTopRatedMovies(): MoviesWrapper
 }
