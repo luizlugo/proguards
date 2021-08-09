@@ -13,7 +13,7 @@ import com.volcanolabs.proguardr8.domain.entities.Movie
 import com.volcanolabs.proguardr8.utils.API_KEY
 import com.volcanolabs.proguardr8.utils.POSTER_PATH_IMAGE
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
+class MoviesAdapter constructor(val listener: MovieListListener) : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
     private var movies: List<Movie>? = null
 
     @SuppressLint("NotifyDataSetChanged")
@@ -31,8 +31,8 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
     }
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
-        movies?.run {
-            holder.bind(this.get(position))
+        movies?.let {
+            holder.bind(it.get(position))
         }
     }
 
@@ -40,18 +40,28 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
         return movies?.size ?: 0
     }
 
-    class MoviesHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MoviesHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private var ivMovieImage: ImageView = itemView.findViewById(R.id.iv_movie_image);
         private var tvOverview: TextView = itemView.findViewById(R.id.tv_overview)
+        private lateinit var movie: Movie
 
         fun bind(movie: Movie) {
+            this.movie = movie
             val path = "${POSTER_PATH_IMAGE}${movie.posterPath}?api_key=${API_KEY}"
-
             Picasso.get()
                 .load(path)
                 .into(ivMovieImage)
 
             tvOverview.text = movie.overview
+            itemView.setOnClickListener(this)
         }
+
+        override fun onClick(p0: View?) {
+            listener.onMovieClick(movie)
+        }
+    }
+
+    interface MovieListListener {
+        fun onMovieClick(movie: Movie)
     }
 }

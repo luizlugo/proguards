@@ -1,5 +1,7 @@
 package com.volcanolabs.proguardr8.domain.entities
 
+import java.io.Serializable
+
 data class Movie(
     val id: Number,
     val posterPath: String?,
@@ -15,4 +17,4 @@ data class Movie(
     val voteCount: Number?,
     val video: Boolean,
     val voteAverage: Number
-)
+) : Serializable
