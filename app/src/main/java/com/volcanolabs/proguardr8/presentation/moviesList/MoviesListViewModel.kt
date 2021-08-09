@@ -23,9 +23,16 @@ class MoviesListViewModel @Inject constructor(
         fetchPopularMovies()
     }
 
-    private fun fetchPopularMovies() {
+    fun fetchPopularMovies() {
         viewModelScope.launch {
             val moviesResponse = getPopularMovies.execute()
+            _movies.value = moviesResponse
+        }
+    }
+
+    fun fetchTopRatedMovies() {
+        viewModelScope.launch {
+            val moviesResponse = getTopRatedMovies.execute()
             _movies.value = moviesResponse
         }
     }
